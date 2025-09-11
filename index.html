@@ -125,77 +125,6 @@
     .summary .total { text-align: right; font-weight: bold; font-size: 14px; color: #111; }
     .summary .discount { text-align: right; font-size: 13px; color: #000; margin-top: 4px; }
     .summary .hint { text-align: right; font-size: 12px; color: green; margin-top: 2px; font-style: italic; font-weight: bold; }
-
-    .payment-title {
-      font-weight: bold;
-      font-size: 14.3px;
-      margin-top: 20px;
-      margin-bottom: 10px;
-      color: #000;
-    }
-    .stripe-box {
-      display: inline-block;
-      padding: 14px 28px;
-      background: #635BFF;
-      color: #fff;
-      font-weight: bold;
-      font-size: 18px;
-      border-radius: 4px;
-      position: relative;
-      margin-bottom: 18px;
-      text-transform: lowercase;
-    }
-    .stripe-box::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      border-top: 26px solid #ccc;
-      border-left: 26px solid transparent;
-      border-top-right-radius: 4px;
-    }
-    .payment-box {
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 14px;
-      background: #fff;
-      margin-top: 10px;
-    }
-    .payment-row {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .amount-due-cell {
-      font-weight: bold;
-      font-size: 15px;
-      margin-bottom: 10px;
-      width: 100%;
-    }
-    .card-cell { flex: 1; }
-    .card-input-line {
-      display: flex;
-      gap: 10px;
-    }
-    .card-input-line input:nth-child(1) { flex: 0.8; }
-    .card-input-line input:nth-child(2),
-    .card-input-line input:nth-child(3) { flex: 0.2; }
-    .card-input-line input {
-      padding: 10px;
-      border: 1px solid #1a73e8;
-      border-radius: 5px;
-      font-size: 13px;
-      box-sizing: border-box;
-      background: #fff;
-    }
-    .error-msg {
-      color: red;
-      font-size: 11px;
-      margin-top: 2px;
-      display: none;
-    }
     .submit-btn {
       margin-top: 20px;
       width: 100%;
@@ -208,177 +137,98 @@
       cursor: pointer;
     }
   </style>
-  <script>
-    const payers = [
-      "UnitedHealthcare",
-    "Elevance Health",
-    "Kaiser Permanente",
-    "Centene",
-    "Humana",
-    "Aetna",
-    "Cigna",
-    "Blue Cross Blue Shield",
-    "Oscar Health",
-    "Molina Healthcare",
-    "Bright Health",
-    "AmeriHealth Caritas",
-    "Point32Health",
-    "Medicare",
-    "Medicaid",
-    "Tricare",
-    "Ambetter",
-    "Highmark",
-    "GuideWell",
-    "CareSource",
-    "UPMC Health Plan",
-    "MultiPlan",
-    "GEHA",
-    "WellCare",
-    "Clover Health",
-    "Independence Health Group",
-    "CareFirst",
-    "Health Net",
-    "Kaiser Foundation Health Plan",
-    "Bright Health Group",
-    "Molina Choice",
-    "Oscar Insurance",
-    "Centivo",
-    "Alignment Healthcare",
-    "AvMed",
-    "Blue Shield",
-    "Cambia Health Solutions",
-    "Magellan Health",
-    "Fidelis Care",
-    "Tufts Health Plan",
-    "Harvard Pilgrim",
-    "CareMore",
-    "Community Health Plan",
-    "Devoted Health",
-    "Elderplan",
-    "EmblemHealth",
-    "Fallon Health",
-    "Gateway Health",
-    "HealthPartners",
-    "Independence Blue Cross",
-    "L.A. Care",
-    "Magellan Complete Care",
-    "Medical Mutual",
-    "MetroPlus",
-    "Oscar Advantage",
-    "Partner Care",
-    "Priority Health",
-    "SelectHealth",
-    "Tufts Advantage",
-    "UPMC for You",
-    "Wellmark",
-    "Winnebago IN Health",
-    "Zenith Insurance Group",
-    "CareOregon",
-    "Harvard Pilgrim Health Care",
-    "HealthFirst",
-    "HealthSpring",
-    "Healthworx",
-    "HealthShare",
-    "HMO Plan",
-    "Johns Hopkins HealthCare",
-    "Neighborhood Health Plan",
-    "Paramount Elite",
-    "Presbyterian Health Plan",
-    "Sharp Health Plan",
-    "SummaCare",
-    "The Health Plan",
-    "TriWest",
-    "Trustmark",
-    "Tufts Navigator",
-    "UCare",
-    "UnitedHealthOne",
-    "WellPoint",
-    "Windsor Health Plan",
-    "YourCare",
-    "Zing Health",
-    "CarePlus Health Plans",
-    "Foundation Health",
-    "HealthChoice",
-    "HealthPartners Plans",
-    "Heritage Health",
-    "Navitus Health Solutions",
-    "PreferredOne",
-    "Scottdale Health Care",
-    "Sierra Health",
-    "Simply Healthcare",
-    "Wellness Partners",
-    "Zion Health",
-    "Zipari",
-    "First Health"
-    ];
+</head>
+<body>
+  <div class="form-container">
+    <h2>Credentialing Services Order Form</h2>
 
-    function validatePayer(input) {
-      const errorMsg = input.parentNode.querySelector('.error-msg');
-      if (/[^a-zA-Z0-9\s]/.test(input.value) || /\band\b/i.test(input.value)) {
-        errorMsg.style.display = 'block';
-      } else {
-        errorMsg.style.display = 'none';
-      }
+    <form id="credentialingForm">
+      <div class="practice-row">
+        <div class="form-group">
+          <label>Practice Name *</label>
+          <input type="text" name="practiceName" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Contact Person *</label>
+          <input type="text" name="firstName" placeholder="First name" required>
+        </div>
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <input type="text" name="lastName" placeholder="Last name" required>
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" name="email" placeholder="you@clinic.com" required>
+        </div>
+      </div>
+
+      <div class="phone-row">
+        <div class="form-group">
+          <label>Contact Phone Number *</label>
+          <input type="text" name="phone" placeholder="+1 (___) ___-____" required>
+        </div>
+        <div class="spacer"></div>
+      </div>
+
+      <h3>Credentialing Applications</h3>
+      <table class="app-table">
+        <thead>
+          <tr>
+            <th style="width:32px">SR #</th>
+            <th style="width:28%">Clinician Name *</th>
+            <th style="width:28%">Payer Name *</th>
+            <th style="width:12%">Fee</th>
+            <th style="width:26px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><input type="text" name="clinicianName1" required></td>
+            <td><input type="text" name="payerName1" required></td>
+            <td class="fee">$200.00</td>
+            <td><button type="button" class="remove-btn" onclick="removeRow(this)">×</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="add-btn" onclick="addRow()">+ Add Application</button>
+
+      <div class="summary">
+        <div class="apps-count">Total Number of Applications: <span id="appsCount">1</span></div>
+        <div class="total">Total: <span id="totalAmount">$200.00</span></div>
+        <div class="discount" id="discountInfo">No discount applied</div>
+        <div class="hint">Get 10% off every 5 applications (up to 50% maximum discount).</div>
+      </div>
+
+      <button type="submit" class="submit-btn">Book service now!</button>
+    </form>
+  </div>
+
+  <script>
+    function addRow() {
+      const tbody = document.querySelector('.app-table tbody');
+      const rowCount = tbody.rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${rowCount}</td>
+        <td><input type="text" name="clinicianName${rowCount}" required></td>
+        <td><input type="text" name="payerName${rowCount}" required></td>
+        <td class="fee">$200.00</td>
+        <td><button type="button" class="remove-btn" onclick="removeRow(this)">×</button></td>
+      `;
+      tbody.appendChild(tr);
+      updateSummary();
     }
 
-    function setupAutocomplete(input) {
-      let selectedFromList = false;
-      let manualMode = false;
-
-      input.addEventListener("input", function () {
-        if (manualMode) return; // manual mode mein autocomplete band
-
-        selectedFromList = false;
-        const val = this.value.toLowerCase();
-        let list = payers.filter(p => p.toLowerCase().startsWith(val));
-        let dropdown = this.nextElementSibling;
-        dropdown.innerHTML = "";
-
-        if (val && list.length > 0) {
-          list.forEach(payer => {
-            const option = document.createElement("div");
-            option.textContent = payer;
-            option.style.padding = "5px";
-            option.style.cursor = "pointer";
-            option.onmouseover = () => option.style.background = "#eef3f9";
-            option.onmouseout = () => option.style.background = "#fff";
-            option.onclick = () => {
-              this.value = payer;
-              selectedFromList = true;
-              dropdown.innerHTML = "";
-            };
-            dropdown.appendChild(option);
-          });
-        }
-
-        // Agar koi match nahi mila → Add manually option
-        if (val && list.length === 0) {
-          const option = document.createElement("div");
-          option.textContent = "➕ Add Payer Manually";
-          option.style.fontStyle = "italic";
-          option.style.color = "#0a4c86";
-          option.style.padding = "5px";
-          option.style.cursor = "pointer";
-          option.onmouseover = () => option.style.background = "#eef3f9";
-          option.onmouseout = () => option.style.background = "#fff";
-          option.onclick = () => {
-            manualMode = true;
-            selectedFromList = true; // blur pe clear na ho
-            dropdown.innerHTML = "";
-            this.focus();
-          };
-          dropdown.appendChild(option);
-        }
-      });
-
-      // Agar dropdown se select nahi kia aur manual mode off hai → clear
-      input.addEventListener("blur", function () {
-        setTimeout(() => {
-          if (!selectedFromList && !manualMode) {
-            this.value = "";
-          }
-        }, 150);
-      });
+    function removeRow(btn) {
+      const row = btn.closest('tr');
+      row.remove();
+      const rows = document.querySelectorAll('.app-table tbody tr');
+      rows.forEach((r, i) => r.cells[0].innerText = i + 1);
+      updateSummary();
     }
 
     function updateSummary() {
@@ -395,132 +245,30 @@
       document.getElementById('totalAmount').innerText = `$${baseTotal.toFixed(2)}`;
       document.getElementById('discountInfo').innerText =
         discountRate > 0 ? `Discount Applied: -$${discountAmount.toFixed(2)} (${(discountRate*100).toFixed(0)}%)` : 'No discount applied';
-      document.getElementById('paymentAmount').innerText = `$${finalTotal.toFixed(2)}`;
     }
 
-    function addRow() {
-      const tbody = document.querySelector('.app-table tbody');
-      const rowCount = tbody.rows.length + 1;
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${rowCount}</td>
-        <td><input type="text" placeholder="Enter Clinician Name"></td>
-        <td>
-          <div style="position:relative">
-            <input type="text" placeholder="Search Payer" oninput="validatePayer(this)">
-            <div class="dropdown" style="position:absolute; background:#fff; border:1px solid #ccc; width:100%; z-index:10;"></div>
-            <div class="error-msg">Special characters and word 'and' are not allowed</div>
-          </div>
-        </td>
-        <td class="fee">$200.00</td>
-        <td><button class="remove-btn" onclick="removeRow(this)">×</button></td>
-      `;
-      tbody.appendChild(tr);
-      setupAutocomplete(tr.querySelector('input[placeholder="Search Payer"]'));
-      updateSummary();
-    }
+    document.getElementById("credentialingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("⏳ Please wait... your submission is in process.");
 
-    function removeRow(btn) {
-      const row = btn.closest('tr');
-      row.remove();
-      const rows = document.querySelectorAll('.app-table tbody tr');
-      rows.forEach((r, i) => r.cells[0].innerText = i + 1);
-      updateSummary();
-    }
+      const form = e.target;
+      const data = new FormData(form);
 
-    window.onload = () => {
-      setupAutocomplete(document.querySelector('.app-table tbody tr input[placeholder="Search Payer"]'));
-      updateSummary();
-    };
+      fetch("https://script.google.com/macros/s/AKfycbzXeSwc55auqu3UK8ZPkUb5hAm4kmXI4AB2gNKixradvwZCzbBB-S_8sXA4BuF-mi0eUg/exec", {
+        method: "POST",
+        body: data
+      })
+      .then(response => response.text())
+      .then(result => {
+        alert("✅ Thank you! Your submission has been received.\n\nOne of our enrollment specialists will reach out to you shortly to begin the credentialing process.");
+        form.reset();
+        updateSummary();
+      })
+      .catch(error => {
+        alert("⚠️ There was an error submitting your form. Please try again.");
+        console.error("Error:", error);
+      });
+    });
   </script>
-</head>
-<body>
-  <div class="form-container">
-    <h2>Credentialing Services Order Form</h2>
-
-    <div class="practice-row">
-      <div class="form-group">
-        <label>Practice Name *</label>
-        <input type="text" placeholder="Enter practice name">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label>Contact Person *</label>
-        <input type="text" placeholder="First name">
-      </div>
-      <div class="form-group">
-        <label>&nbsp;</label>
-        <input type="text" placeholder="Last name">
-      </div>
-      <div class="form-group">
-        <label>Email *</label>
-        <input type="email" placeholder="you@clinic.com">
-      </div>
-    </div>
-
-    <div class="phone-row">
-      <div class="form-group">
-        <label>Contact Phone Number *</label>
-        <input type="text" placeholder="+1 (___) ___-____">
-      </div>
-      <div class="spacer"></div>
-    </div>
-
-    <h3>Credentialing Applications</h3>
-    <table class="app-table">
-      <thead>
-        <tr>
-          <th style="width:32px">SR #</th>
-          <th style="width:28%">Clinician Name *</th>
-          <th style="width:28%">Payer Name *</th>
-          <th style="width:12%">Fee</th>
-          <th style="width:26px"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td><input type="text" placeholder="Enter Clinician Name"></td>
-          <td>
-            <div style="position:relative">
-              <input type="text" placeholder="Search Payer" oninput="validatePayer(this)">
-              <div class="dropdown" style="position:absolute; background:#fff; border:1px solid #ccc; width:100%; z-index:10;"></div>
-              <div class="error-msg">Special characters and word 'and' are not allowed</div>
-            </div>
-          </td>
-          <td class="fee">$200.00</td>
-          <td><button class="remove-btn" onclick="removeRow(this)">×</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <button class="add-btn" onclick="addRow()">+ Add Application</button>
-
-    <div class="summary">
-      <div class="apps-count">Total Number of Applications: <span id="appsCount">1</span></div>
-      <div class="total">Total: <span id="totalAmount">$200.00</span></div>
-      <div class="discount" id="discountInfo">No discount applied</div>
-      <div class="hint">Get 10% off every 5 applications (up to 50% maximum discount).</div>
-    </div>
-
-    <div class="payment-title">Make Payment to Continue *</div>
-    <div class="stripe-box">stripe</div>
-
-    <div class="payment-box">
-      <div class="payment-row">
-        <div class="amount-due-cell">Amount Due: <span id="paymentAmount">$200.00</span></div>
-        <div class="card-cell">
-          <div class="card-input-line">
-            <input type="text" placeholder="Card number">
-            <input type="text" placeholder="MM / YY">
-            <input type="text" placeholder="CVC">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <button class="submit-btn">Book service now!</button>
-  </div>
 </body>
 </html>
