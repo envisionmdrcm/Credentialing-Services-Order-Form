@@ -8,17 +8,14 @@
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(90deg, #CCE7E2, #E5F1F4);
-      background-size: cover;
       padding: 20px;
       min-height: 100vh;
       display: flex;
-      align-items: flex-start;
       justify-content: center;
     }
     .form-container {
       max-width: 720px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.9);
       padding: 20px 28px;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
@@ -29,272 +26,196 @@
       padding: 12px;
       border-radius: 6px;
       font-size: 18px;
-      margin-bottom: 20px;
       text-align: center;
     }
-    .form-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
+    .form-row, .phone-row, .practice-row { display: flex; gap: 12px; margin-bottom: 12px; }
     .form-group { flex: 1; }
-    .phone-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-    .practice-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-      font-size: 12px;
-    }
+    label { font-size: 12px; font-weight: bold; margin-bottom: 5px; display: block; }
+    label .required { color: red; } /* Red asterisk for mandatory fields */
     input[type="text"], input[type="email"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 13px;
-      box-sizing: border-box;
-      background: #fff;
+      width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px;
     }
+    input:invalid { border-color: red; }
     .add-btn {
-      margin: 8px 0;
-      padding: 6px 12px;
-      background: #0a4c86;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 12px;
+      margin: 8px 0; padding: 6px 12px; background: #0a4c86; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;
     }
-    .app-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0 8px;
-      margin-top: 8px;
-    }
-    .app-table th {
-      background: #eef3f9;
-      font-weight: bold;
-      font-size: 12px;
-      color: #333;
-      padding: 10px;
-      text-align: left;
-    }
-    .app-table td {
-      padding: 6px 6px;
-      vertical-align: middle;
-    }
-    .app-table input {
-      width: 100%;
-      padding: 8px;
-      font-size: 12px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .app-table td.fee {
-      text-align: center;
-      min-width: 80px;
-    }
-    .fee { font-weight: bold; font-size: 13px; color: #111; }
-    .remove-btn {
-      background: none;
-      border: none;
-      color: red;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .summary {
-      border-top: 1px solid #ccc;
-      margin-top: 12px;
-      padding-top: 8px;
-    }
-    .summary .apps-count { text-align: right; font-size: 13px; margin-bottom: 4px; color: #000; font-style: italic; font-weight: bold; }
-    .summary .total { text-align: right; font-weight: bold; font-size: 14px; color: #111; }
-    .summary .discount { text-align: right; font-size: 13px; color: #000; margin-top: 4px; }
-    .summary .hint { text-align: right; font-size: 12px; color: green; margin-top: 2px; font-style: italic; font-weight: bold; }
-
-    .submit-btn {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background: #0a4c86;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    /* Loader overlay */
-    #loadingOverlay {
- display: none;  /* default: hidden */
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255,255,255,0.95);
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: #0a4c86;
-    }
+    .app-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin-top: 8px; }
+    .app-table th { background: #eef3f9; font-size: 12px; color: #333; padding: 10px; text-align: left; }
+    .app-table td { padding: 6px; vertical-align: middle; }
+    .app-table input { width: 100%; padding: 8px; font-size: 12px; border: 1px solid #ccc; border-radius: 5px; }
+    .fee { font-weight: bold; font-size: 13px; color: #111; text-align: center; }
+    .remove-btn { background: none; border: none; color: red; font-size: 16px; cursor: pointer; }
+    .summary { border-top: 1px solid #ccc; margin-top: 12px; padding-top: 8px; }
+    .summary .apps-count, .summary .total, .summary .discount, .summary .hint { text-align: right; font-size: 13px; margin-top: 4px; }
+    .summary .total { font-weight: bold; font-size: 14px; }
+    .summary .hint { color: green; font-style: italic; font-weight: bold; }
+    .payment-title { font-weight: bold; font-size: 14px; margin-top: 20px; margin-bottom: 10px; }
+    .stripe-box { display: inline-block; padding: 14px 28px; background: #635BFF; color: #fff; font-weight: bold; border-radius: 4px; margin-bottom: 18px; }
+    .payment-box { border: 1px solid #ccc; border-radius: 6px; padding: 14px; background: #fff; }
+    .payment-row { display: flex; flex-direction: column; gap: 12px; }
+    .amount-due-cell { font-weight: bold; font-size: 15px; }
+    .card-input-line { display: flex; gap: 10px; }
+    .card-input-line input:nth-child(1) { flex: 0.8; }
+    .card-input-line input:nth-child(2), .card-input-line input:nth-child(3) { flex: 0.2; }
+    .error-msg { color: red; font-size: 11px; display: none; }
+    .submit-btn { margin-top: 20px; width: 100%; padding: 12px; background: #0a4c86; color: #fff; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; }
   </style>
-</head>
-<body>
-  <div class="form-container">
-    <h2>Credentialing Services Order Form</h2>
-    <form id="credentialingForm">
-      <div class="practice-row">
-        <div class="form-group">
-          <label>Practice Name *</label>
-          <input type="text" name="practiceName" required placeholder="Enter practice name">
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Contact Person *</label>
-          <input type="text" name="firstName" required placeholder="First name">
-        </div>
-        <div class="form-group">
-          <label>&nbsp;</label>
-          <input type="text" name="lastName" required placeholder="Last name">
-        </div>
-        <div class="form-group">
-          <label>Email *</label>
-          <input type="email" name="email" required placeholder="you@clinic.com">
-        </div>
-      </div>
-
-      <div class="phone-row">
-        <div class="form-group">
-          <label>Contact Phone Number *</label>
-          <input type="text" name="phone" required placeholder="+1 (___) ___-____">
-        </div>
-      </div>
-
-      <h3>Credentialing Applications</h3>
-      <table class="app-table">
-        <thead>
-          <tr>
-            <th style="width:32px">SR #</th>
-            <th style="width:28%">Clinician Name *</th>
-            <th style="width:28%">Payer Name *</th>
-            <th style="width:12%">Fee</th>
-            <th style="width:26px"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td><input type="text" name="clinician[]" required placeholder="Enter Clinician Name"></td>
-            <td><input type="text" name="payer[]" required placeholder="Enter Payer"></td>
-            <td class="fee">$200.00</td>
-            <td><button type="button" class="remove-btn" onclick="removeRow(this)">×</button></td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" class="add-btn" onclick="addRow()">+ Add Application</button>
-
-      <div class="summary">
-        <div class="apps-count">Total Number of Applications: <span id="appsCount">1</span></div>
-        <div class="total">Total: <span id="totalAmount">$200.00</span></div>
-        <div class="discount" id="discountInfo">No discount applied</div>
-        <div class="hint">Get 10% off every 5 applications (up to 50% maximum discount).</div>
-      </div>
-
-      <button class="submit-btn" type="submit">Book service now!</button>
-    </form>
-  </div>
-
-  <!-- Loader Overlay -->
-  <div id="loadingOverlay">⏳ Please wait... your submission is in process.</div>
-
   <script>
-    function updateSummary() {
-      const rows = document.querySelectorAll('.app-table tbody tr');
-      const count = rows.length;
-      const baseTotal = count * 200;
+    const payers = [
+      "UnitedHealthcare","Elevance Health","Kaiser Permanente","Centene","Humana","Aetna","Cigna","Blue Cross Blue Shield","Oscar Health","Molina Healthcare",
+      "Bright Health","AmeriHealth Caritas","Point32Health","Medicare","Medicaid","Tricare","Ambetter","Highmark","GuideWell","CareSource","UPMC Health Plan",
+      "MultiPlan","GEHA","WellCare","Clover Health","Independence Health Group","CareFirst","Health Net","Kaiser Foundation Health Plan","Bright Health Group",
+      "Molina Choice","Oscar Insurance","Centivo","Alignment Healthcare","AvMed","Blue Shield","Cambia Health Solutions","Magellan Health","Fidelis Care",
+      "Tufts Health Plan","Harvard Pilgrim","CareMore","Community Health Plan","Devoted Health","Elderplan","EmblemHealth","Fallon Health","Gateway Health",
+      "HealthPartners","Independence Blue Cross","L.A. Care","Magellan Complete Care","Medical Mutual","MetroPlus","Oscar Advantage","Partner Care","Priority Health",
+      "SelectHealth","Tufts Advantage","UPMC for You","Wellmark","Winnebago IN Health","Zenith Insurance Group","CareOregon","Harvard Pilgrim Health Care","HealthFirst",
+      "HealthSpring","Healthworx","HealthShare","HealthPlan","Johns Hopkins HealthCare","Neighborhood Health Plan","Paramount Elite","Presbyterian Health Plan",
+      "Sharp Health Plan","SummaCare","The Health Plan","TriWest","Trustmark","Tufts Navigator","UCare","UnitedHealthOne","WellPoint","Windsor Health Plan","YourCare",
+      "Zing Health","CarePlus Health Plans","Foundation Health","HealthChoice","HealthPartners Plans","Heritage Health","Navitus Health Solutions","PreferredOne",
+      "Scottdale Health Care","Sierra Health","Simply Healthcare","Wellness Partners","Zion Health","Zipari","First Health"
+    ];
 
-      let discountRate = Math.floor(count / 5) * 0.10;
-      if (discountRate > 0.50) discountRate = 0.50;
-      const discountAmount = baseTotal * discountRate;
-      const finalTotal = baseTotal - discountAmount;
-
-      document.getElementById('appsCount').innerText = count;
-      document.getElementById('totalAmount').innerText = `$${baseTotal.toFixed(2)}`;
-      document.getElementById('discountInfo').innerText =
-        discountRate > 0 ? `Discount Applied: -$${discountAmount.toFixed(2)} (${(discountRate*100).toFixed(0)}%)` : 'No discount applied';
+    function setupAutocomplete(input) {
+      let selectedFromList = false;
+      let manualMode = false;
+      input.addEventListener("input", function () {
+        if (manualMode) return;
+        selectedFromList = false;
+        const val = this.value.toLowerCase();
+        let list = payers.filter(p => p.toLowerCase().startsWith(val));
+        let dropdown = this.nextElementSibling;
+        dropdown.innerHTML = "";
+        if (val && list.length > 0) {
+          list.forEach(payer => {
+            const option = document.createElement("div");
+            option.textContent = payer;
+            option.style.padding = "5px";
+            option.style.cursor = "pointer";
+            option.onclick = () => { this.value = payer; selectedFromList = true; manualMode = false; dropdown.innerHTML = ""; };
+            dropdown.appendChild(option);
+          });
+        }
+        if (val && list.length === 0) {
+          const option = document.createElement("div");
+          option.textContent = "➕ Add Payer Manually";
+          option.style.fontStyle = "italic"; option.style.color = "#0a4c86"; option.style.padding = "5px"; option.style.cursor = "pointer";
+          option.onclick = () => { manualMode = true; selectedFromList = true; dropdown.innerHTML = ""; this.focus(); };
+          dropdown.appendChild(option);
+        }
+      });
+      input.addEventListener("blur", function () {
+        setTimeout(() => { if (!selectedFromList && !manualMode) this.value = ""; }, 150);
+      });
     }
 
     function addRow() {
       const tbody = document.querySelector('.app-table tbody');
-      const rowCount = tbody.rows.length + 1;
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${rowCount}</td>
-        <td><input type="text" name="clinician[]" required placeholder="Enter Clinician Name"></td>
-        <td><input type="text" name="payer[]" required placeholder="Enter Payer"></td>
-        <td class="fee">$200.00</td>
-        <td><button type="button" class="remove-btn" onclick="removeRow(this)">×</button></td>
-      `;
-      tbody.appendChild(tr);
-      updateSummary();
-    }
-
-    function removeRow(btn) {
-      const row = btn.closest('tr');
-      row.remove();
-      const rows = document.querySelectorAll('.app-table tbody tr');
-      rows.forEach((r, i) => r.cells[0].innerText = i + 1);
-      updateSummary();
-    }
-
-    document.getElementById("credentialingForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      // Show loader
-      document.getElementById("loadingOverlay").style.display = "flex";
-
-      const form = e.target;
-      const data = new FormData(form);
-
-      fetch("https://script.google.com/macros/s/AKfycbzXeSwc55auqu3UK8ZPkUb5hAm4kmXI4AB2gNKixradvwZCzbBB-S_8sXA4BuF-mi0eUg/exec", {
-        method: "POST",
-        body: data
-      })
-      .then(response => response.text())
-      .then(result => {
-        // Replace page with Thank You
-        document.body.innerHTML = `
-          <div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:Arial,sans-serif;">
-            <div style="text-align:center;">
-              <h1 style="color:#0a4c86;">✅ Thank you!</h1>
-              <p>Your submission has been received.</p>
-              <p>One of our enrollment specialists will reach out to you shortly to begin the credentialing process.</p>
-              <button onclick="window.location.reload()" 
-                style="margin-top:20px;padding:10px 20px;background:#0a4c86;color:#fff;border:none;border-radius:6px;cursor:pointer;">
-                🔄 Submit Another Response
-              </button>
-            </div>
+        <td>${tbody.rows.length+1}</td>
+        <td><input type="text" placeholder="Enter Clinician Name" required></td>
+        <td>
+          <div style="position:relative">
+            <input type="text" placeholder="Search Payer" required>
+            <div class="dropdown" style="position:absolute; background:#fff; border:1px solid #ccc; width:100%; z-index:10;"></div>
           </div>
-        `;
-      })
-      .catch(error => {
-        document.getElementById("loadingOverlay").style.display = "none";
-        alert("⚠️ There was an error submitting your form. Please try again.");
-        console.error("Error:", error);
-      });
-    });
+        </td>
+        <td class="fee">$200.00</td>
+        <td><button class="remove-btn" onclick="this.closest('tr').remove()">×</button></td>`;
+      tbody.appendChild(tr);
+      setupAutocomplete(tr.querySelector('input[placeholder="Search Payer"]'));
+    }
 
-    window.onload = updateSummary;
+    function validateForm() {
+      const requiredInputs = document.querySelectorAll("input[required]");
+      let valid = true;
+      requiredInputs.forEach(inp => {
+        if (!inp.value.trim()) { inp.style.borderColor = "red"; valid = false; } else { inp.style.borderColor = "#ccc"; }
+      });
+      if (!valid) { alert("Please fill all mandatory fields before submitting."); }
+      return valid;
+    }
+
+    window.onload = () => {
+      setupAutocomplete(document.querySelector('.app-table tbody input[placeholder="Search Payer"]'));
+    };
   </script>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Credentialing Services Order Form</h2>
+
+    <div class="practice-row">
+      <div class="form-group">
+        <label>Practice Name <span class="required">*</span></label>
+        <input type="text" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name <span class="required">*</span></label>
+        <input type="text" required>
+      </div>
+      <div class="form-group">
+        <label>Last Name <span class="required">*</span></label>
+        <input type="text" required>
+      </div>
+      <div class="form-group">
+        <label>Email <span class="required">*</span></label>
+        <input type="email" required>
+      </div>
+    </div>
+
+    <div class="phone-row">
+      <div class="form-group">
+        <label>Phone <span class="required">*</span></label>
+        <input type="text" required>
+      </div>
+    </div>
+
+    <h3>Credentialing Applications</h3>
+    <table class="app-table">
+      <thead>
+        <tr>
+          <th>SR #</th>
+          <th>Clinician Name <span class="required">*</span></th>
+          <th>Payer Name <span class="required">*</span></th>
+          <th>Fee</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><input type="text" placeholder="Enter Clinician Name" required></td>
+          <td>
+            <div style="position:relative">
+              <input type="text" placeholder="Search Payer" required>
+              <div class="dropdown" style="position:absolute; background:#fff; border:1px solid #ccc; width:100%; z-index:10;"></div>
+            </div>
+          </td>
+          <td class="fee">$200.00</td>
+          <td><button class="remove-btn" onclick="this.closest('tr').remove()">×</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="add-btn" type="button" onclick="addRow()">+ Add Application</button>
+
+    <div class="payment-title">Make Payment to Continue <span class="required">*</span></div>
+    <div class="stripe-box">stripe</div>
+    <div class="payment-box">
+      <div class="payment-row">
+        <div class="amount-due-cell">Amount Due: $200.00 <span class="required">*</span></div>
+        <div class="card-input-line">
+          <input type="text" placeholder="Card number" required>
+          <input type="text" placeholder="MM / YY" required>
+          <input type="text" placeholder="CVC" required>
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="return validateForm()">Book service now!</button>
+  </div>
 </body>
 </html>
